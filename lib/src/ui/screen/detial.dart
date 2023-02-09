@@ -15,7 +15,7 @@ class _DetialscreenState extends State<Detialscreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        actions: [TextButton(onPressed: () {}, child: Icon(Icons.arrow_back))],
+        actions: [],
         title: Text('Usd-Thb'),
       ),
       body: _buildbody(context),

@@ -11,11 +11,13 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  int showborder = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber,
-      appBar: AppBar(backgroundColor: Colors.transparent, actions: [
+      backgroundColor: Color(0xff400E32),
+      appBar:
+          AppBar(elevation: 0, backgroundColor: Color(0xff400E32), actions: [
         TextButton(
             onPressed: () {},
             child: CircleAvatar(
@@ -36,48 +38,101 @@ class _HomepageState extends State<Homepage> {
       children: [
         Expanded(
             child: Container(
-          padding: EdgeInsets.symmetric(vertical: 30),
-          color: Colors.red,
+          padding: EdgeInsets.only(bottom: 30),
+          color: Color(0xff400E32),
           child: Column(children: [
-            Text('testdata'),
-            Expanded(
-                flex: 2,
-                child: Container(
-                  color: Colors.amber,
-                )),
+            Text(
+              'Euro/Us .Dollar',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Expanded(flex: 2, child: Container(color: Colors.grey)),
+            SizedBox(
+              height: 10,
+            ),
             Container(
-              color: Colors.blueGrey,
+              width: MediaQuery.of(context).size.width * 0.75,
               child:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.all(5),
-                  child: Text('5m'),
+                Buttontime(
+                  showborder: showborder,
+                  numberindex: 1,
+                  word: '10m',
+                  onpress: () {
+                    setState(() {
+                      showborder = 1;
+                    });
+                  },
                 ),
-                Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.all(5),
-                  child: Text('10m'),
+                SizedBox(
+                  width: 5,
                 ),
-                Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.all(5),
-                  child: Text('15m'),
+                Buttontime(
+                  showborder: showborder,
+                  numberindex: 2,
+                  word: '10m',
+                  onpress: () {
+                    setState(() {
+                      showborder = 2;
+                    });
+                  },
                 ),
-                Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.all(5),
-                  child: Text('30m'),
+                SizedBox(
+                  width: 10,
                 ),
-                Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.all(5),
-                  child: Text('1m'),
+                Buttontime(
+                  showborder: showborder,
+                  numberindex: 3,
+                  word: '10m',
+                  onpress: () {
+                    setState(() {
+                      showborder = 3;
+                    });
+                  },
                 ),
-                Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.all(5),
-                  child: Text('4m'),
+                SizedBox(
+                  width: 10,
+                ),
+                Buttontime(
+                  showborder: showborder,
+                  numberindex: 4,
+                  word: '10m',
+                  onpress: () {
+                    setState(() {
+                      showborder = 4;
+                    });
+                  },
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Buttontime(
+                  showborder: showborder,
+                  numberindex: 5,
+                  word: '10m',
+                  onpress: () {
+                    setState(() {
+                      showborder = 5;
+                    });
+                  },
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Buttontime(
+                  showborder: showborder,
+                  numberindex: 6,
+                  word: '10m',
+                  onpress: () {
+                    setState(() {
+                      showborder = 6;
+                    });
+                  },
                 ),
               ]),
             )
@@ -86,104 +141,165 @@ class _HomepageState extends State<Homepage> {
         Expanded(
             child: Container(
           decoration: BoxDecoration(
-              color: Colors.green,
+              color: Color(0xffEDDBC7),
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(60), topRight: Radius.circular(60))),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            Text(
-              'Top 10 instruments',
-              style: TextStyle(color: Colors.black, fontSize: 20),
-            ),
             SizedBox(
               height: 15,
+            ),
+            Text(
+              'Top 10 instruments'.toUpperCase(),
+              style: TextStyle(
+                  color: Colors.black38,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600),
+            ),
+            SizedBox(
+              height: 20,
             ),
             Expanded(
               child: ListView.builder(
                   itemCount: 10,
                   itemBuilder: (context, index) {
-                    return Container(
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      width: MediaQuery.of(context).size.width * 0.7,
-                      height: MediaQuery.of(context).size.height * 0.1,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 10,
-                      ),
-                      decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              color: Colors.red,
-                              child: Column(children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: CircleAvatar(
-                                        child: Icon(Icons.flag),
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Detialscreen()));
+                      },
+                      child: Container(
+                        margin:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        height: MediaQuery.of(context).size.height * 0.1,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 10,
+                        ),
+                        decoration: BoxDecoration(
+                            color: Color(0xff400E32),
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: CircleAvatar(
+                                              radius: 10,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
+                                                child: Image(
+                                                    image: AssetImage(
+                                                        'assets/images/usflagtst.jpg')),
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: CircleAvatar(
+                                              radius: 10,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
+                                                child: Image(
+                                                    image: AssetImage(
+                                                        'assets/images/eurflagtest.png')),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                    Expanded(
-                                      child: CircleAvatar(
-                                        child: Icon(Icons.flag),
+                                      SizedBox(
+                                        height: 10,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Text('Eur-usd')
-                              ]),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Expanded(
-                            child: Container(
-                              color: Colors.red,
-                              child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text('testdata'),
-                                    Text('testdata')
-                                  ]),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Expanded(
-                            child: Container(
-                              color: Colors.red,
-                              child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text('testdata'),
-                                    Text('testdata')
-                                  ]),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Expanded(
-                            child: Container(
-                              color: Colors.red,
-                              child: TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              Detialscreen()));
-                                },
-                                child: Icon(Icons.arrow_forward),
+                                      Text(
+                                        'Eur-usd'.toUpperCase(),
+                                        style: TextStyle(
+                                            fontSize: 12, color: Colors.white),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      )
+                                    ]),
                               ),
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Expanded(
+                              child: Container(
+                                child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Bid:1.0211',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 12),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        'Ask:1.0211',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 12),
+                                      )
+                                    ]),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Expanded(
+                              child: Container(
+                                child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'spreads'.toUpperCase(),
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 12),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        '0.12%',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 12),
+                                      )
+                                    ]),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Expanded(
+                              child: Container(
+                                child: TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Detialscreen()));
+                                  },
+                                  child: Icon(
+                                    Icons.arrow_forward,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   }),
@@ -191,6 +307,39 @@ class _HomepageState extends State<Homepage> {
           ]),
         ))
       ],
+    );
+  }
+}
+
+class Buttontime extends StatelessWidget {
+  Buttontime(
+      {required this.word,
+      this.onpress,
+      required this.numberindex,
+      required this.showborder});
+  final String word;
+  final int numberindex;
+  final VoidCallback? onpress;
+  final int showborder;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onpress,
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(width: 2, color: Colors.white),
+          color: numberindex == showborder ? Color(0xff400E32) : Colors.white,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 3, vertical: 7),
+        child: Text(
+          word,
+          style: TextStyle(
+              color: numberindex == showborder
+                  ? Colors.white
+                  : Colors.grey.shade500),
+        ),
+      ),
     );
   }
 }
