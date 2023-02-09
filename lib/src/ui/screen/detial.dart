@@ -1,31 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../../modals/chartdata.dart';
+import '../../modals/data.dart';
 import 'Homepage.dart';
 
 class Detialscreen extends StatefulWidget {
-  const Detialscreen({super.key});
-
+  Detialscreen({required this.datalist, required this.index});
+  final int index;
+  final List<Data> datalist;
   @override
   State<Detialscreen> createState() => _DetialscreenState();
 }
 
 class _DetialscreenState extends State<Detialscreen> {
   int showborder = 0;
+
   @override
   Widget build(BuildContext context) {
+    Data info = widget.datalist[widget.index];
     return Scaffold(
       backgroundColor: Color(0xff400E32),
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.transparent,
         actions: [],
-        title: Text('Usd/Thb'.toUpperCase()),
+        title: Text(info.name.toUpperCase()),
       ),
-      body: _buildbody(context),
+      body: _buildbody(context, widget.index, widget.datalist),
     );
   }
 
-  Widget _buildbody(BuildContext context) {
+  Widget _buildbody(BuildContext context, index, datalist) {
+    Data info = datalist[index];
+    var data = [
+      Chartdata(value: info.quote.usd.percentChange30D, year: '30D'),
+      Chartdata(value: info.quote.usd.percentChange7D, year: '7D'),
+      Chartdata(value: info.quote.usd.percentChange24H, year: '24H'),
+      Chartdata(value: info.quote.usd.percentChange1H, year: '1h'),
+    ];
     return Container(
       child: Column(children: [
         SizedBox(
@@ -37,7 +50,7 @@ class _DetialscreenState extends State<Detialscreen> {
             Buttontime(
               showborder: showborder,
               numberindex: 1,
-              word: '10m',
+              word: '1 H',
               onpress: () {
                 setState(() {
                   showborder = 1;
@@ -50,7 +63,7 @@ class _DetialscreenState extends State<Detialscreen> {
             Buttontime(
               showborder: showborder,
               numberindex: 2,
-              word: '10m',
+              word: '24H',
               onpress: () {
                 setState(() {
                   showborder = 2;
@@ -63,7 +76,7 @@ class _DetialscreenState extends State<Detialscreen> {
             Buttontime(
               showborder: showborder,
               numberindex: 3,
-              word: '10m',
+              word: '7 D',
               onpress: () {
                 setState(() {
                   showborder = 3;
@@ -76,7 +89,7 @@ class _DetialscreenState extends State<Detialscreen> {
             Buttontime(
               showborder: showborder,
               numberindex: 4,
-              word: '10m',
+              word: '30D',
               onpress: () {
                 setState(() {
                   showborder = 4;
@@ -86,29 +99,6 @@ class _DetialscreenState extends State<Detialscreen> {
             SizedBox(
               width: 10,
             ),
-            Buttontime(
-              showborder: showborder,
-              numberindex: 5,
-              word: '10m',
-              onpress: () {
-                setState(() {
-                  showborder = 5;
-                });
-              },
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Buttontime(
-              showborder: showborder,
-              numberindex: 6,
-              word: '10m',
-              onpress: () {
-                setState(() {
-                  showborder = 6;
-                });
-              },
-            ),
           ]),
         ),
         SizedBox(
@@ -117,7 +107,21 @@ class _DetialscreenState extends State<Detialscreen> {
         Container(
           height: MediaQuery.of(context).size.height * 0.50,
           width: MediaQuery.of(context).size.width,
-          color: Colors.grey,
+          color: Colors.white,
+          child: SfCartesianChart(
+            plotAreaBorderWidth: 0,
+            primaryXAxis: CategoryAxis(isVisible: true),
+            primaryYAxis: CategoryAxis(isVisible: true),
+            legend: Legend(isVisible: false),
+            tooltipBehavior: TooltipBehavior(enable: true),
+            series: <ChartSeries<Chartdata, String>>[
+              SplineSeries(
+                  dataSource: data,
+                  xValueMapper: (Chartdata sales, _) => sales.year.toString(),
+                  yValueMapper: (Chartdata sales, _) => sales.value,
+                  animationDuration: 3000)
+            ],
+          ),
         ),
         Container(
           height: MediaQuery.of(context).size.height * 0.05,
@@ -125,7 +129,7 @@ class _DetialscreenState extends State<Detialscreen> {
           child: Row(
             children: [
               Text(
-                'Instrument USD/THB',
+                'Instrument ${info.name}',
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
               ),
@@ -133,7 +137,7 @@ class _DetialscreenState extends State<Detialscreen> {
                 child: Container(),
               ),
               Text(
-                'Spread 0.010',
+                'Pricechange 24H ${info.quote.usd.percentChange24H}',
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
               ),
@@ -155,11 +159,15 @@ class _DetialscreenState extends State<Detialscreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Date 2021-03-31 06:35:37',
+                        'Date ${info.lastUpdated}'.substring(0, 24),
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.w700),
                       ),
-                      Text('CloseOut Bid :1.345',
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                          'Marketcap: ${info.quote.usd.marketCap.toStringAsFixed(0)}',
                           style: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.w700))
                     ],
@@ -168,14 +176,18 @@ class _DetialscreenState extends State<Detialscreen> {
                     width: 15,
                   ),
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Tradable :True',
+                      Text('Volume Change 24H',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w700)),
-                      Text('CloseOut Ask :1.345',
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text('${info.quote.usd.volumeChange24H}',
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.w700))
                     ],
