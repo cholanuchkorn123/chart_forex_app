@@ -110,8 +110,8 @@ class _DetialscreenState extends State<Detialscreen> {
           color: Colors.white,
           child: SfCartesianChart(
             plotAreaBorderWidth: 0,
-            primaryXAxis: CategoryAxis(isVisible: true),
-            primaryYAxis: CategoryAxis(isVisible: true),
+            primaryXAxis: CategoryAxis(),
+            primaryYAxis: NumericAxis(),
             legend: Legend(isVisible: false),
             tooltipBehavior: TooltipBehavior(enable: true),
             series: <ChartSeries<Chartdata, String>>[

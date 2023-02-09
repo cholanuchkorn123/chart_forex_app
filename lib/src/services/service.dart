@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 class Service {
   final Dio _dio = Dio();
   final String mainUrl = "https://pro-api.coinmarketcap.com/v1/";
-  final String apikey = 'your-api';
+  final String apikey = '';
   Future<List<Data>> getcoinprice() async {
     try {
     _dio.options.headers['X-CMC_PRO_API_KEY'] = apikey;
